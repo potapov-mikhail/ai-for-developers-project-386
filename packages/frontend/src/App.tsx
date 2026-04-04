@@ -1,27 +1,17 @@
-import { Routes, Route, Link } from 'react-router'
-import { buttonVariants } from '@/components/ui/button'
-
-function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
-      <h1 className="text-4xl font-bold">Booking App</h1>
-      <p className="text-muted-foreground">Select a section:</p>
-      <div className="flex gap-4">
-        <Link to="/public" className={buttonVariants()}>
-          Public
-        </Link>
-        <Link to="/owner" className={buttonVariants({ variant: 'outline' })}>
-          Owner
-        </Link>
-      </div>
-    </div>
-  )
-}
+import { Routes, Route } from 'react-router'
+import Layout from '@/components/Layout'
+import HomePage from '@/pages/HomePage'
+import BookingPage from '@/pages/BookingPage'
+import EventsPage from '@/pages/EventsPage'
 
 function App() {
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="booking" element={<BookingPage />} />
+        <Route path="events" element={<EventsPage />} />
+      </Route>
     </Routes>
   )
 }
