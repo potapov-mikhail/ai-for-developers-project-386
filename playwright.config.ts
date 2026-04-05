@@ -13,9 +13,7 @@ export default defineConfig({
     timezoneId: 'UTC',
     locale: 'ru-RU',
   },
-  projects: [
-    { name: 'chromium', use: { browserName: 'chromium' } },
-  ],
+  projects: [{ name: 'chromium', use: { browserName: 'chromium' } }],
   webServer: [
     {
       command: 'npm -w @booking/backend run dev',

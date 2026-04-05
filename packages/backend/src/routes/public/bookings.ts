@@ -14,11 +14,7 @@ const publicBookingsRoutes: FastifyPluginAsync = async (app) => {
   }>('/bookings', async (request, reply) => {
     const { eventTypeId, startAt, guestName, guestEmail } = request.body;
 
-    const eventType = db
-      .select()
-      .from(eventTypes)
-      .where(eq(eventTypes.id, eventTypeId))
-      .get();
+    const eventType = db.select().from(eventTypes).where(eq(eventTypes.id, eventTypeId)).get();
 
     if (!eventType) {
       return reply.code(404).send({ message: 'Event type not found' });

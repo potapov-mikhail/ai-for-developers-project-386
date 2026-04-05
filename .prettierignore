@@ -1,0 +1,4 @@
+dist
+node_modules
+packages/backend/drizzle
+packages/spec/tsp-output

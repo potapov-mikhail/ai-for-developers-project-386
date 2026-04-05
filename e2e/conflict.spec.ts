@@ -12,8 +12,18 @@ function getTomorrowUTC() {
 }
 
 const MONTH_NAMES = [
-  'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
-  'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь',
+  'январь',
+  'февраль',
+  'март',
+  'апрель',
+  'май',
+  'июнь',
+  'июль',
+  'август',
+  'сентябрь',
+  'октябрь',
+  'ноябрь',
+  'декабрь',
 ];
 
 async function navigateToMonth(page: Page, targetMonth: number, targetYear: number) {
@@ -60,7 +70,9 @@ test.describe('Slot Conflicts', () => {
     await page.getByPlaceholder('Email').fill('conflict@test.com');
     await page.getByRole('button', { name: 'Подтвердить запись' }).click();
 
-    await expect(page.getByText('Бронь подтверждена. До встречи!')).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText('Бронь подтверждена. До встречи!')).toBeVisible({
+      timeout: 10_000,
+    });
 
     // Click "Book another" and go to the same date
     await page.getByRole('button', { name: 'Забронировать еще' }).click();

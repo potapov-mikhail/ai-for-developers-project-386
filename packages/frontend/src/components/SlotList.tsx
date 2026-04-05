@@ -1,12 +1,12 @@
-import type { Slot } from '@/types'
-import { cn } from '@/lib/utils'
+import type { Slot } from '@/types';
+import { cn } from '@/lib/utils';
 
 interface SlotListProps {
-  slots: Slot[]
-  selectedSlot: Slot | null
-  onSelectSlot: (slot: Slot) => void
-  onBack: () => void
-  onContinue: () => void
+  slots: Slot[];
+  selectedSlot: Slot | null;
+  onSelectSlot: (slot: Slot) => void;
+  onBack: () => void;
+  onContinue: () => void;
 }
 
 function formatTime(iso: string) {
@@ -14,7 +14,7 @@ function formatTime(iso: string) {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-  })
+  });
 }
 
 export default function SlotList({
@@ -30,17 +30,14 @@ export default function SlotList({
       <div className="max-h-[400px] space-y-2 overflow-y-auto">
         {slots.map((slot) => {
           const isSelected =
-            selectedSlot?.startAt === slot.startAt &&
-            selectedSlot?.endAt === slot.endAt
+            selectedSlot?.startAt === slot.startAt && selectedSlot?.endAt === slot.endAt;
           return (
             <button
               key={slot.startAt}
               onClick={() => onSelectSlot(slot)}
               className={cn(
                 'flex w-full items-center justify-between rounded-lg border px-4 py-2.5 text-sm transition-colors',
-                isSelected
-                  ? 'border-orange-500 bg-orange-50 font-medium'
-                  : 'hover:bg-muted',
+                isSelected ? 'border-orange-500 bg-orange-50 font-medium' : 'hover:bg-muted',
               )}
             >
               <span>
@@ -48,7 +45,7 @@ export default function SlotList({
               </span>
               <span className="text-muted-foreground">Свободно</span>
             </button>
-          )
+          );
         })}
       </div>
       <div className="mt-4 flex gap-3">
@@ -63,14 +60,12 @@ export default function SlotList({
           disabled={!selectedSlot}
           className={cn(
             'flex-1 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors',
-            selectedSlot
-              ? 'bg-orange-500 hover:bg-orange-600'
-              : 'bg-orange-300 cursor-not-allowed',
+            selectedSlot ? 'bg-orange-500 hover:bg-orange-600' : 'bg-orange-300 cursor-not-allowed',
           )}
         >
           Продолжить
         </button>
       </div>
     </div>
-  )
+  );
 }

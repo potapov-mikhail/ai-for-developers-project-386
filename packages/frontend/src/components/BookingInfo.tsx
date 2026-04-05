@@ -1,10 +1,10 @@
-import type { EventType, Slot } from '@/types'
+import type { EventType, Slot } from '@/types';
 
 interface BookingInfoProps {
-  selectedDate: string | null
-  selectedSlot: Slot | null
-  freeSlots: number
-  eventType: EventType | null
+  selectedDate: string | null;
+  selectedSlot: Slot | null;
+  freeSlots: number;
+  eventType: EventType | null;
 }
 
 function formatTime(iso: string) {
@@ -12,16 +12,16 @@ function formatTime(iso: string) {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-  })
+  });
 }
 
 function formatDateRu(dateStr: string) {
-  const date = new Date(dateStr + 'T00:00:00')
+  const date = new Date(dateStr + 'T00:00:00');
   return date.toLocaleDateString('ru-RU', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
-  })
+  });
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
@@ -30,7 +30,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="text-sm font-medium">{value}</p>
     </div>
-  )
+  );
 }
 
 export default function BookingInfo({
@@ -41,7 +41,7 @@ export default function BookingInfo({
 }: BookingInfoProps) {
   const timeStr = selectedSlot
     ? `${formatTime(selectedSlot.startAt)} - ${formatTime(selectedSlot.endAt)}`
-    : 'Время не выбрано'
+    : 'Время не выбрано';
 
   return (
     <div>
@@ -63,5 +63,5 @@ export default function BookingInfo({
         />
       </div>
     </div>
-  )
+  );
 }
