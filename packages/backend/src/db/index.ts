@@ -9,7 +9,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = path.resolve(__dirname, '../../data');
 fs.mkdirSync(dataDir, { recursive: true });
 
-const dbPath = path.join(dataDir, 'booking.db');
+const dbPath = process.env.BOOKING_DB_PATH
+  ? path.resolve(process.env.BOOKING_DB_PATH)
+  : path.join(dataDir, 'booking.db');
 const sqlite = new Database(dbPath);
 sqlite.pragma('journal_mode = WAL');
 sqlite.pragma('foreign_keys = ON');
