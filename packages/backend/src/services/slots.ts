@@ -1,11 +1,11 @@
 interface AvailabilityWindow {
   startTime: string; // HH:mm
-  endTime: string;   // HH:mm
+  endTime: string; // HH:mm
 }
 
 interface BookingRecord {
   startAt: string; // ISO 8601
-  endAt: string;   // ISO 8601
+  endAt: string; // ISO 8601
 }
 
 interface Slot {

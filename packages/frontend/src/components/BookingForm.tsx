@@ -1,42 +1,37 @@
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { api } from '@/api/client'
-import type { Slot } from '@/types'
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { api } from '@/api/client';
+import type { Slot } from '@/types';
 
 interface BookingFormProps {
-  eventTypeId: string
-  slot: Slot
-  onSuccess: () => void
-  onBack: () => void
+  eventTypeId: string;
+  slot: Slot;
+  onSuccess: () => void;
+  onBack: () => void;
 }
 
-export default function BookingForm({
-  eventTypeId,
-  slot,
-  onSuccess,
-  onBack,
-}: BookingFormProps) {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+export default function BookingForm({ eventTypeId, slot, onSuccess, onBack }: BookingFormProps) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setSubmitting(true)
-    setError(null)
+    e.preventDefault();
+    setSubmitting(true);
+    setError(null);
     try {
       await api.createBooking({
         eventTypeId,
         startAt: slot.startAt,
         guestName: name,
         guestEmail: email,
-      })
-      onSuccess()
+      });
+      onSuccess();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Произошла ошибка')
+      setError(err instanceof Error ? err.message : 'Произошла ошибка');
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
   }
 
@@ -53,12 +48,7 @@ export default function BookingForm({
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          placeholder="Имя"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <Input placeholder="Имя" value={name} onChange={(e) => setName(e.target.value)} required />
         <Input
           type="email"
           placeholder="Email"
@@ -76,5 +66,5 @@ export default function BookingForm({
         </button>
       </form>
     </div>
-  )
+  );
 }

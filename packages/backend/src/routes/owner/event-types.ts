@@ -19,9 +19,7 @@ const ownerEventTypesRoutes: FastifyPluginAsync = async (app) => {
     const now = new Date().toISOString();
     const id = crypto.randomUUID();
 
-    db.insert(eventTypes)
-      .values({ id, name, description, durationMinutes, createdAt: now })
-      .run();
+    db.insert(eventTypes).values({ id, name, description, durationMinutes, createdAt: now }).run();
 
     return reply.code(201).send({
       id,

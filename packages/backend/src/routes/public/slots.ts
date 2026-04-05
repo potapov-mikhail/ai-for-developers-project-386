@@ -12,11 +12,7 @@ const publicSlotsRoutes: FastifyPluginAsync = async (app) => {
     const { eventTypeId } = request.params;
     const { date } = request.query;
 
-    const eventType = db
-      .select()
-      .from(eventTypes)
-      .where(eq(eventTypes.id, eventTypeId))
-      .get();
+    const eventType = db.select().from(eventTypes).where(eq(eventTypes.id, eventTypeId)).get();
 
     if (!eventType) {
       return reply.code(404).send({ message: 'Event type not found' });
@@ -45,12 +41,7 @@ const publicSlotsRoutes: FastifyPluginAsync = async (app) => {
       .where(and(gte(bookings.startAt, dayStart), lt(bookings.startAt, dayEnd)))
       .all();
 
-    return computeAvailableSlots(
-      date,
-      dayAvailability,
-      eventType.durationMinutes,
-      dayBookings,
-    );
+    return computeAvailableSlots(date, dayAvailability, eventType.durationMinutes, dayBookings);
   });
 };
 

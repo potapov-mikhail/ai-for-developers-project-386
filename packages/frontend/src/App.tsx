@@ -1,8 +1,8 @@
-import { Routes, Route } from 'react-router'
-import Layout from '@/components/Layout'
-import HomePage from '@/pages/HomePage'
-import BookingPage from '@/pages/BookingPage'
-import EventsPage from '@/pages/EventsPage'
+import { Routes, Route } from 'react-router';
+import Layout from '@/components/Layout';
+import HomePage from '@/pages/HomePage';
+import BookingPage from '@/pages/BookingPage';
+import EventsPage from '@/pages/EventsPage';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Route path="events" element={<EventsPage />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

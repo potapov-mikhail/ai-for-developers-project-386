@@ -4,7 +4,10 @@ import path from 'path';
 import fs from 'fs';
 
 const TEST_DB = path.resolve(__dirname, '../../packages/backend/data/test-booking.db');
-const MIGRATION_FILE = path.resolve(__dirname, '../../packages/backend/drizzle/0000_tricky_post.sql');
+const MIGRATION_FILE = path.resolve(
+  __dirname,
+  '../../packages/backend/drizzle/0000_tricky_post.sql',
+);
 
 function openDb() {
   const dir = path.dirname(TEST_DB);
@@ -48,20 +51,31 @@ function resetAndSeed(sqlite: ReturnType<typeof Database>) {
 
   // Seed one event type
   const eventTypeId = crypto.randomUUID();
-  sqlite.prepare(
-    `INSERT INTO event_types (id, name, description, duration_minutes, created_at) VALUES (?, ?, ?, ?, ?)`,
-  ).run(eventTypeId, '30-минутный звонок', 'Короткий звонок для знакомства', 30, new Date().toISOString());
+  sqlite
+    .prepare(
+      `INSERT INTO event_types (id, name, description, duration_minutes, created_at) VALUES (?, ?, ?, ?, ?)`,
+    )
+    .run(
+      eventTypeId,
+      '30-минутный звонок',
+      'Короткий звонок для знакомства',
+      30,
+      new Date().toISOString(),
+    );
 
   return eventTypeId;
 }
 
 export const test = base.extend<{ resetDb: string }>({
-  resetDb: [async ({}, use) => {
-    const sqlite = openDb();
-    const eventTypeId = resetAndSeed(sqlite);
-    sqlite.close();
-    await use(eventTypeId);
-  }, { auto: true }],
+  resetDb: [
+    async ({}, use) => {
+      const sqlite = openDb();
+      const eventTypeId = resetAndSeed(sqlite);
+      sqlite.close();
+      await use(eventTypeId);
+    },
+    { auto: true },
+  ],
 });
 
 export { expect } from '@playwright/test';

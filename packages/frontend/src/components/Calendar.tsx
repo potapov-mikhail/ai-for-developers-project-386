@@ -1,27 +1,37 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
-const WEEKDAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+const WEEKDAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
 interface CalendarProps {
-  year: number
-  month: number
-  selectedDate: string | null
-  slotCounts?: Record<string, number>
-  onSelectDate: (date: string) => void
-  onPrevMonth: () => void
-  onNextMonth: () => void
+  year: number;
+  month: number;
+  selectedDate: string | null;
+  slotCounts?: Record<string, number>;
+  onSelectDate: (date: string) => void;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
 }
 
 function formatDate(y: number, m: number, d: number) {
-  return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
+  return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 }
 
 function getMonthName(month: number) {
   const names = [
-    'январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
-    'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь',
-  ]
-  return names[month]
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
+  ];
+  return names[month];
 }
 
 export default function Calendar({
@@ -33,32 +43,32 @@ export default function Calendar({
   onPrevMonth,
   onNextMonth,
 }: CalendarProps) {
-  const firstDay = new Date(year, month, 1)
-  const startWeekday = (firstDay.getDay() + 6) % 7 // Mon=0
-  const daysInMonth = new Date(year, month + 1, 0).getDate()
+  const firstDay = new Date(year, month, 1);
+  const startWeekday = (firstDay.getDay() + 6) % 7; // Mon=0
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   // Previous month fill
-  const prevMonthDays = new Date(year, month, 0).getDate()
-  const cells: { day: number; month: number; year: number; current: boolean }[] = []
+  const prevMonthDays = new Date(year, month, 0).getDate();
+  const cells: { day: number; month: number; year: number; current: boolean }[] = [];
 
   for (let i = startWeekday - 1; i >= 0; i--) {
-    const d = prevMonthDays - i
-    const m = month === 0 ? 11 : month - 1
-    const y = month === 0 ? year - 1 : year
-    cells.push({ day: d, month: m, year: y, current: false })
+    const d = prevMonthDays - i;
+    const m = month === 0 ? 11 : month - 1;
+    const y = month === 0 ? year - 1 : year;
+    cells.push({ day: d, month: m, year: y, current: false });
   }
 
   for (let d = 1; d <= daysInMonth; d++) {
-    cells.push({ day: d, month, year, current: true })
+    cells.push({ day: d, month, year, current: true });
   }
 
   // Next month fill
-  const remaining = 7 - (cells.length % 7)
+  const remaining = 7 - (cells.length % 7);
   if (remaining < 7) {
     for (let d = 1; d <= remaining; d++) {
-      const m = month === 11 ? 0 : month + 1
-      const y = month === 11 ? year + 1 : year
-      cells.push({ day: d, month: m, year: y, current: false })
+      const m = month === 11 ? 0 : month + 1;
+      const y = month === 11 ? year + 1 : year;
+      cells.push({ day: d, month: m, year: y, current: false });
     }
   }
 
@@ -92,12 +102,13 @@ export default function Calendar({
           </div>
         ))}
         {cells.map((cell, i) => {
-          const dateStr = formatDate(cell.year, cell.month, cell.day)
-          const isSelected = dateStr === selectedDate
-          const count = slotCounts?.[dateStr]
-          const today = new Date()
-          const cellDate = new Date(cell.year, cell.month, cell.day)
-          const isPast = cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())
+          const dateStr = formatDate(cell.year, cell.month, cell.day);
+          const isSelected = dateStr === selectedDate;
+          const count = slotCounts?.[dateStr];
+          const today = new Date();
+          const cellDate = new Date(cell.year, cell.month, cell.day);
+          const isPast =
+            cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
           return (
             <button
@@ -109,7 +120,8 @@ export default function Calendar({
                 !cell.current && 'text-muted-foreground/40',
                 cell.current && !isPast && 'hover:bg-muted cursor-pointer',
                 isPast && 'text-muted-foreground/40',
-                isSelected && 'border-2 border-orange-500 bg-orange-50 font-semibold text-orange-700',
+                isSelected &&
+                  'border-2 border-orange-500 bg-orange-50 font-semibold text-orange-700',
               )}
             >
               <span>{cell.day}</span>
@@ -117,9 +129,9 @@ export default function Calendar({
                 <span className="text-[10px] text-muted-foreground">{count} св.</span>
               )}
             </button>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

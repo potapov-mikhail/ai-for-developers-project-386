@@ -1,5 +1,5 @@
-import { NavLink, Outlet } from 'react-router'
-import { cn } from '@/lib/utils'
+import { NavLink, Outlet } from 'react-router';
+import { cn } from '@/lib/utils';
 
 function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
   return (
@@ -14,7 +14,7 @@ function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
     >
       {children}
     </NavLink>
-  )
+  );
 }
 
 export default function Layout() {
@@ -38,5 +38,5 @@ export default function Layout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }

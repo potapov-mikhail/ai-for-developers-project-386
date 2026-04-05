@@ -1,6 +1,6 @@
-import { Link } from 'react-router'
-import { buttonVariants } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Link } from 'react-router';
+import { buttonVariants } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function HomePage() {
   return (
@@ -11,8 +11,8 @@ export default function HomePage() {
         </span>
         <h1 className="text-5xl font-bold tracking-tight">Calendar</h1>
         <p className="text-lg text-muted-foreground">
-          Один экран, понятные слоты, быстрая бронь. Выберите время и
-          запишитесь на звонок без лишних шагов.
+          Один экран, понятные слоты, быстрая бронь. Выберите время и запишитесь на звонок без
+          лишних шагов.
         </p>
         <Link
           to="/booking"
@@ -36,5 +36,5 @@ export default function HomePage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

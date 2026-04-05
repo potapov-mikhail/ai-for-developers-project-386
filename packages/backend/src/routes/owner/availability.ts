@@ -28,11 +28,7 @@ const availabilityRoutes: FastifyPluginAsync = async (app) => {
       .where(eq(availability.dayOfWeek, dayOfWeek))
       .run();
 
-    return db
-      .select()
-      .from(availability)
-      .where(eq(availability.dayOfWeek, dayOfWeek))
-      .get();
+    return db.select().from(availability).where(eq(availability.dayOfWeek, dayOfWeek)).get();
   });
 };
 
