@@ -8,3 +8,8 @@ dist/
 # Dependency directories
 node_modules/
 .idea
+
+# Playwright
+test-results/
+playwright-report/
+**/test-booking.db
