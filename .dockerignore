@@ -7,3 +7,4 @@ e2e
 .github
 *.md
 .claude
+.env
