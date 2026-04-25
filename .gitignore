@@ -13,3 +13,5 @@ node_modules/
 test-results/
 playwright-report/
 **/test-booking.db
+.env
+.claude/settings.local.json 
